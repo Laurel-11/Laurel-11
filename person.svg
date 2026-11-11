@@ -1,59 +1,246 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 135" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 520" width="100%" height="100%">
   <defs>
     <style>
       :root {
-        --ink: #18181B;
-        --muted: #71717A;
-        --rule: #E4E4E7;
-        --pill-bg: #F4F4F5;
+        --bg-card: #FAF9F5;
+        --grid-line: rgba(24, 24, 27, 0.04);
+        --ink-black: #1E1E20;
+        --charcoal: #2B2B2E;
+        --skin-tone: #EFECE6;
+        --skin-shadow: #DFDBD2;
+        --bag-grey: #B5B5B0;
+        --pure-white: #FFFFFF;
+        --accent-muted: #787873;
+        --border-color: #E4E2DD;
       }
       @media (prefers-color-scheme: dark) {
         :root {
-          --ink: #F4F4F5;
-          --muted: #A1A1AA;
-          --rule: #27272A;
-          --pill-bg: #18181B;
+          --bg-card: #141416;
+          --grid-line: rgba(255, 255, 255, 0.03);
+          --ink-black: #222226;
+          --charcoal: #2E2E34;
+          --skin-tone: #D8D4CD;
+          --skin-shadow: #C2BDB4;
+          --bag-grey: #6E6E6A;
+          --pure-white: #F2F0EB;
+          --accent-muted: #8E8E88;
+          --border-color: #2A2A2E;
         }
       }
-      .mono {
-        font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
-        font-size: 10.5px;
-        fill: var(--muted);
-        letter-spacing: 2px;
+
+      /* 呼吸与微交互动画 */
+      @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-5px); }
       }
-      .editorial-title {
-        font-family: Georgia, "Times New Roman", Times, serif;
-        font-size: 38px;
-        fill: var(--ink);
-        letter-spacing: -0.5px;
+      @keyframes candy-bob {
+        0%, 100% { transform: rotate(0deg); }
+        50% { transform: rotate(-5deg); }
       }
-      .editorial-italic {
-        font-style: italic;
-        font-weight: normal;
+      @keyframes badge-swing {
+        0%, 100% { transform: rotate(-2deg); }
+        50% { transform: rotate(3deg); }
       }
-      @keyframes blink {
+      @keyframes ear-twitch {
+        0%, 88%, 100% { transform: rotate(0deg); }
+        92% { transform: rotate(-8deg); }
+        96% { transform: rotate(4deg); }
+      }
+      @keyframes pulse-dot {
         0%, 100% { opacity: 1; }
         50% { opacity: 0.25; }
       }
-      .status-dot { animation: blink 2.4s ease-in-out infinite; }
+      @keyframes sparkle {
+        0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.7; }
+        50% { transform: scale(0.6) rotate(45deg); opacity: 0.2; }
+      }
+
+      .character-group { animation: float 4.5s ease-in-out infinite; }
+      .lollipop { transform-origin: 255px 212px; animation: candy-bob 4.5s ease-in-out infinite; }
+      .id-badge { transform-origin: 215px 305px; animation: badge-swing 5s ease-in-out infinite; }
+      .bunny-ear { transform-origin: 145px 365px; animation: ear-twitch 6s ease-in-out infinite; }
+      .rec-dot { animation: pulse-dot 2s infinite; }
+      .star-1 { transform-origin: 85px 120px; animation: sparkle 4s ease-in-out infinite; }
+      .star-2 { transform-origin: 345px 280px; animation: sparkle 5s ease-in-out infinite 1.5s; }
+      
+      .editorial-text {
+        font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+        font-size: 9.5px;
+        fill: var(--accent-muted);
+        letter-spacing: 1.5px;
+      }
+      .serif-quote {
+        font-family: Georgia, "Times New Roman", serif;
+        font-style: italic;
+        font-size: 11px;
+        fill: var(--accent-muted);
+      }
     </style>
+
+    <!-- 杂志方格网底纹 -->
+    <pattern id="editorial-grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="var(--grid-line)" stroke-width="1"/>
+    </pattern>
+
+    <!-- 铅笔素描肌理滤镜 -->
+    <filter id="sketch-texture" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise" />
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.2" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
   </defs>
 
-  <!-- 顶部极简杂志刊头栏 -->
-  <line x1="0" y1="16" x2="840" y2="16" stroke="var(--rule)" stroke-width="1"/>
-  <text x="2" y="36" class="mono">ISSUE Nº 01 · PORTFOLIO &amp; ARCHIVE</text>
-  
-  <!-- 右上角在线状态胶囊 -->
-  <rect x="658" y="23" width="180" height="20" rx="10" fill="var(--pill-bg)" stroke="var(--rule)" stroke-width="0.8"/>
-  <circle cx="671" cy="33" r="3.5" fill="#10B981" class="status-dot"/>
-  <text x="682" y="36.5" class="mono" style="font-size: 9.5px; letter-spacing: 1.2px;">AVAILABLE FOR COLLAB</text>
+  <!-- 1. 画布背景与杂志边框 -->
+  <rect x="4" y="4" width="412" height="512" rx="18" fill="var(--bg-card)" stroke="var(--border-color)" stroke-width="1.5"/>
+  <rect x="4" y="4" width="412" height="512" rx="18" fill="url(#editorial-grid)"/>
 
-  <!-- 核心大标题：衬线体混排 -->
-  <text x="2" y="92" class="editorial-title">
-    Building with <tspan class="editorial-italic">AI agency</tspan>, crafting with <tspan class="editorial-italic">taste</tspan>.
-  </text>
+  <!-- 顶部取景框 Header -->
+  <g transform="translate(24, 28)">
+    <circle cx="5" cy="-3.5" r="3.5" fill="#D9534F" class="rec-dot"/>
+    <text x="15" y="0" class="editorial-text">REC · VIBE_MODE</text>
+    <text x="372" y="0" class="editorial-text" text-anchor="end">FIG. 01</text>
+  </g>
 
-  <!-- 底部坐标与分割线 -->
-  <text x="2" y="120" class="mono" style="letter-spacing: 1px;">BEIJING (BUPT) &amp; LONDON · DESIGN-DRIVEN AI BUILDER</text>
-  <line x1="0" y1="132" x2="840" y2="132" stroke="var(--rule)" stroke-width="1"/>
+  <!-- 装饰性四角微标 -->
+  <path d="M 20 45 L 20 38 L 27 38" fill="none" stroke="var(--border-color)" stroke-width="1.2"/>
+  <path d="M 400 45 L 400 38 L 393 38" fill="none" stroke="var(--border-color)" stroke-width="1.2"/>
+
+  <!-- 闪烁的小星星装饰 -->
+  <path class="star-1" d="M 85 112 Q 85 120 77 120 Q 85 120 85 128 Q 85 120 93 120 Q 85 120 85 112 Z" fill="var(--accent-muted)"/>
+  <path class="star-2" d="M 345 274 Q 345 280 339 280 Q 345 280 345 286 Q 345 280 351 280 Q 345 280 345 274 Z" fill="var(--accent-muted)"/>
+
+  <!-- 2. 主角原创数字分身 (带呼吸浮动) -->
+  <g class="character-group">
+    
+    <!-- === 灰色背包 & 萌兔挂件 === -->
+    <g filter="url(#sketch-texture)">
+      <!-- 背包主体 -->
+      <path d="M 165 285 C 125 275, 102 335, 108 405 C 113 460, 138 492, 178 495 L 198 440 Z" fill="var(--bag-grey)"/>
+      <!-- 背包暗部折痕 -->
+      <path d="M 135 415 Q 155 440 165 485" fill="none" stroke="var(--skin-shadow)" stroke-width="1.5" opacity="0.4"/>
+    </g>
+
+    <!-- 兔子挂件 -->
+    <g>
+      <!-- 左耳 (固定) -->
+      <path d="M 133 368 C 125 342, 134 335, 140 358" fill="var(--pure-white)"/>
+      <!-- 右耳 (会抖动!) -->
+      <path class="bunny-ear" d="M 143 366 C 146 338, 156 338, 152 365" fill="var(--pure-white)"/>
+      <!-- 兔子头 -->
+      <ellipse cx="143" cy="378" rx="17" ry="15" fill="var(--pure-white)"/>
+      <!-- 兔子表情 (x 嘴与豆豆眼) -->
+      <circle cx="136" cy="376" r="1.6" fill="#1E1E20"/>
+      <circle cx="150" cy="374" r="1.6" fill="#1E1E20"/>
+      <path d="M 141 379 L 146 383 M 146 379 L 141 383" stroke="#1E1E20" stroke-width="1.3" stroke-linecap="round"/>
+      <!-- 旁边的迷你小熊猫/小狗挂件 -->
+      <ellipse cx="116" cy="402" rx="10" ry="8.5" fill="var(--pure-white)"/>
+      <path d="M 107 399 C 101 401, 101 407, 107 406 Z" fill="#1E1E20"/>
+      <circle cx="114" cy="401" r="1.3" fill="#1E1E20"/>
+      <circle cx="121" cy="400" r="1.3" fill="#1E1E20"/>
+      <!-- 绒球尾巴与别针线 -->
+      <circle cx="150" cy="420" r="13" fill="var(--pure-white)"/>
+      <path d="M 140 422 C 134 435, 136 452, 141 446 C 145 441, 144 425, 140 420" fill="none" stroke="#4A4A48" stroke-width="1.2"/>
+    </g>
+
+    <!-- === 身体、暗色穿搭与手臂 === -->
+    <g filter="url(#sketch-texture)">
+      <!-- 下半身灰裤/裙 -->
+      <path d="M 172 440 L 165 515 L 258 515 L 236 435 Z" fill="var(--bag-grey)"/>
+      <!-- 后侧手臂 -->
+      <path d="M 228 290 C 235 345, 240 400, 242 445" stroke="var(--skin-shadow)" stroke-width="12" stroke-linecap="round" fill="none"/>
+      <!-- 黑色高领无袖/短袖 T 恤 -->
+      <path d="M 178 250 C 160 280, 152 325, 150 355 L 176 355 L 188 455 C 205 462, 232 455, 240 442 L 228 300 C 242 288, 245 262, 224 242 Z" fill="var(--ink-black)"/>
+      <!-- 衣服下摆高光细节 -->
+      <path d="M 190 412 Q 212 422 232 415" fill="none" stroke="var(--bag-grey)" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+      <!-- 前侧手臂 (自然垂落) -->
+      <path d="M 172 350 C 178 405, 190 460, 202 515" stroke="var(--skin-tone)" stroke-width="15" stroke-linecap="round" fill="none"/>
+      <!-- 脖子与锁骨阴影 -->
+      <path d="M 186 215 L 184 260 C 195 270, 212 268, 216 252 L 212 215 Z" fill="var(--skin-tone)"/>
+      <path d="M 186 220 Q 202 235 213 222 Z" fill="var(--skin-shadow)"/>
+      <!-- 宽松堆堆领 -->
+      <path d="M 174 244 C 185 272, 224 270, 232 242 C 226 232, 216 230, 214 238 C 206 254, 188 254, 184 238 Z" fill="#141416"/>
+    </g>
+
+    <!-- === 极客工牌 (会轻微摆动) === -->
+    <g class="id-badge">
+      <path d="M 188 272 L 218 338" stroke="var(--bag-grey)" stroke-width="1.2" opacity="0.8"/>
+      <path d="M 225 270 L 218 338" stroke="var(--bag-grey)" stroke-width="1.2" opacity="0.8"/>
+      <rect x="206" y="334" width="24" height="33" rx="3" transform="rotate(-22 218 350)" fill="var(--pure-white)" stroke="var(--border-color)" stroke-width="1"/>
+      <line x1="211" y1="344" x2="223" y2="339" stroke="var(--bag-grey)" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="214" y1="350" x2="221" y2="347" stroke="var(--bag-grey)" stroke-width="1.2" stroke-linecap="round"/>
+    </g>
+
+    <!-- === 头部与五官 === -->
+    <!-- 左耳 (带耳廓阴影) -->
+    <path d="M 148 168 C 130 165, 130 202, 154 206 Z" fill="var(--skin-tone)"/>
+    <path d="M 144 176 C 138 178, 139 194, 149 196" fill="none" stroke="var(--skin-shadow)" stroke-width="2" stroke-linecap="round"/>
+
+    <!-- 后脑勺黑色发底 -->
+    <circle cx="205" cy="128" r="78" fill="var(--charcoal)" filter="url(#sketch-texture)"/>
+
+    <!-- 左丸子头 (蓬松凌乱线条) -->
+    <g filter="url(#sketch-texture)">
+      <circle cx="112" cy="125" r="32" fill="var(--ink-black)"/>
+      <path d="M 92 102 C 74 115, 80 155, 108 158 C 132 160, 142 130, 125 102 C 110 85, 82 95, 84 128" fill="none" stroke="var(--charcoal)" stroke-width="2"/>
+      <path d="M 88 148 C 78 162, 98 172, 116 156" fill="none" stroke="var(--ink-black)" stroke-width="1.8"/>
+    </g>
+
+    <!-- 右丸子头 -->
+    <g filter="url(#sketch-texture)">
+      <circle cx="262" cy="48" r="27" fill="var(--ink-black)"/>
+      <path d="M 248 24 C 268 14, 294 38, 282 62 C 270 80, 240 70, 242 42" fill="none" stroke="var(--charcoal)" stroke-width="2"/>
+      <path d="M 282 32 C 296 38, 294 58, 280 65" fill="none" stroke="var(--ink-black)" stroke-width="1.8"/>
+    </g>
+
+    <!-- 脸部轮廓 -->
+    <path d="M 150 140 C 148 198, 165 224, 212 224 C 258 224, 276 192, 272 138 Z" fill="var(--skin-tone)"/>
+
+    <!-- 眼神：半耷拉酷酷的死鱼眼 -->
+    <!-- 左眼 -->
+    <path d="M 176 172 Q 194 168 208 169" stroke="#1E1E20" stroke-width="2.8" stroke-linecap="round" fill="none"/>
+    <path d="M 183 171 C 181 188, 199 192, 203 174 C 204 171, 203 170, 203 170 Z" fill="#1E1E20"/>
+    <circle cx="192" cy="178" r="3.5" fill="#3A3A3E"/>
+    <!-- 右眼 -->
+    <path d="M 246 162 Q 258 158 268 156" stroke="#1E1E20" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+    <path d="M 249 161 C 247 177, 261 180, 264 164 C 264 160, 263 158, 263 158 Z" fill="#1E1E20"/>
+    <circle cx="256" cy="167" r="3" fill="#3A3A3E"/>
+
+    <!-- 齐刘海与耳侧碎发 -->
+    <g filter="url(#sketch-texture)">
+      <path d="M 132 120 C 138 60, 255 52, 276 115 L 274 146 C 264 146, 256 146, 254 134 C 251 146, 246 147, 240 148 C 228 151, 216 152, 212 140 C 208 154, 192 156, 180 156 C 182 142, 182 132, 184 124 C 179 138, 175 150, 170 160 L 160 162 C 164 185, 168 212, 176 232 C 162 222, 152 195, 150 166 Z" fill="var(--ink-black)"/>
+      <!-- 右侧垂落发丝 -->
+      <path d="M 272 135 C 282 175, 276 215, 252 238" fill="none" stroke="var(--charcoal)" stroke-width="2"/>
+    </g>
+
+    <!-- 复古无框椭圆细边眼镜 (带点像素/铅笔质感) -->
+    <g stroke="#7A7670" stroke-width="1.6" stroke-dasharray="2,0.8" fill="rgba(255,255,255,0.12)">
+      <ellipse cx="204" cy="184" rx="18" ry="9.5" transform="rotate(-10 204 184)"/>
+      <ellipse cx="256" cy="173" rx="16" ry="8.5" transform="rotate(-12 256 173)"/>
+      <path d="M 221 180 Q 232 174 240 176" fill="none" stroke-dasharray="none"/>
+    </g>
+
+    <!-- 棒棒糖 (随呼吸轻轻摆动) -->
+    <g class="lollipop">
+      <line x1="238" y1="204" x2="274" y2="210" stroke="var(--pure-white)" stroke-width="3.2" stroke-linecap="round"/>
+      <line x1="238" y1="205" x2="274" y2="211" stroke="var(--skin-shadow)" stroke-width="1" stroke-linecap="round"/>
+    </g>
+
+    <!-- === 标志性白色有线耳机 === -->
+    <g fill="none" stroke="var(--pure-white)" stroke-linecap="round">
+      <!-- 耳机塞 -->
+      <circle cx="147" cy="188" r="5" fill="var(--pure-white)"/>
+      <path d="M 147 188 L 149 204" stroke-width="3.2"/>
+      <!-- 垂坠耳机线 + 线控麦克风 -->
+      <path d="M 149 202 C 150 245, 162 255, 174 268 C 182 288, 192 365, 208 398" stroke-width="2.2"/>
+      <rect x="180" y="302" width="5.5" height="22" rx="2.5" transform="rotate(-14 182 313)" fill="var(--pure-white)"/>
+      <!-- 主线自然垂落 -->
+      <path d="M 208 398 C 218 425, 218 475, 212 505" stroke-width="2.2"/>
+    </g>
+
+  </g>
+
+  <!-- 3. 底部艺术馆展签 Caption -->
+  <g transform="translate(24, 492)">
+    <text x="0" y="0" class="serif-quote">"Wired in, shipping vibes."</text>
+    <text x="372" y="0" class="editorial-text" text-anchor="end">LAUREL © ORIGINAL</text>
+  </g>
 </svg>
