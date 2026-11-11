@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 135" width="100%" height="100%">
+  <defs>
+    <style>
+      :root {
+        --ink: #18181B;
+        --muted: #71717A;
+        --rule: #E4E4E7;
+        --pill-bg: #F4F4F5;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --ink: #F4F4F5;
+          --muted: #A1A1AA;
+          --rule: #27272A;
+          --pill-bg: #18181B;
+        }
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+        font-size: 10.5px;
+        fill: var(--muted);
+        letter-spacing: 2px;
+      }
+      .editorial-title {
+        font-family: Georgia, "Times New Roman", Times, serif;
+        font-size: 38px;
+        fill: var(--ink);
+        letter-spacing: -0.5px;
+      }
+      .editorial-italic {
+        font-style: italic;
+        font-weight: normal;
+      }
+      @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.25; }
+      }
+      .status-dot { animation: blink 2.4s ease-in-out infinite; }
+    </style>
+  </defs>
+
+  <!-- 顶部极简杂志刊头栏 -->
+  <line x1="0" y1="16" x2="840" y2="16" stroke="var(--rule)" stroke-width="1"/>
+  <text x="2" y="36" class="mono">ISSUE Nº 01 · PORTFOLIO &amp; ARCHIVE</text>
+  
+  <!-- 右上角在线状态胶囊 -->
+  <rect x="658" y="23" width="180" height="20" rx="10" fill="var(--pill-bg)" stroke="var(--rule)" stroke-width="0.8"/>
+  <circle cx="671" cy="33" r="3.5" fill="#10B981" class="status-dot"/>
+  <text x="682" y="36.5" class="mono" style="font-size: 9.5px; letter-spacing: 1.2px;">AVAILABLE FOR COLLAB</text>
+
+  <!-- 核心大标题：衬线体混排 -->
+  <text x="2" y="92" class="editorial-title">
+    Building with <tspan class="editorial-italic">AI agency</tspan>, crafting with <tspan class="editorial-italic">taste</tspan>.
+  </text>
+
+  <!-- 底部坐标与分割线 -->
+  <text x="2" y="120" class="mono" style="letter-spacing: 1px;">BEIJING (BUPT) &amp; LONDON · DESIGN-DRIVEN AI BUILDER</text>
+  <line x1="0" y1="132" x2="840" y2="132" stroke="var(--rule)" stroke-width="1"/>
+</svg>
