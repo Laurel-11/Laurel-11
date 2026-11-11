@@ -57,10 +57,9 @@ Instead of getting lost in boilerplate, I practice high-velocity **Vibe Coding**
 
 ### <samp>02 // ANATOMY OF MY TOOLKIT</samp>
 
-```text
-╭────────────────────────────────────────────────────────────────────────────────╮
-│  AI & AGENTS     Claude (Daily Driver) · Amazon Bedrock · Tool-Calling · Kiro  │
-│  CRAFT & DESIGN  Vibe Coding · Rapid Prototyping · UI/UX Details · Aesthetics  │
-│  ENGINEERING     Python · C/C++ · Full-Stack Web · Git / GitHub Workflow       │
-│  PHYSICAL HARDWARE   STM32 Embedded · ROS2 · Sensor Fusion / PID · PCB Basics  │
-╰────────────────────────────────────────────────────────────────────────────────╯
+╭──────────────────────────────────────────────────────────────────────────────╮
+│  AI & AGENTS    Claude (Daily Driver) · Amazon Bedrock · Tool-Calling · Kiro │
+│  CRAFT & VIBE   Vibe Coding · Rapid Prototyping · UI/UX Details · Aesthetics │
+│  ENGINEERING    Python · C/C++ · TypeScript · Full-Stack Web · Git Workflow  │
+│  HARDWARE       STM32 Embedded · ROS2 · Sensor Fusion / PID · PCB Basics     │
+╰──────────────────────────────────────────────────────────────────────────────╯
